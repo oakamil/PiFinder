@@ -171,8 +171,8 @@ def handle_goto_command(shared_state, ra_parsed, dec_parsed):
     global sequence, ui_queue, is_stellarium
     ra = ra_to_deg(*ra_parsed)
     dec = dec_to_deg(*dec_parsed)
-    epoch = if is_stellarium ts.J2000 else ts.now()
-    epoch_s = if is_stellarium "J2000" else "JNOW"
+    epoch = ts.J2000 if is_stellarium else ts.now()
+    epoch_s = "J2000" if is_stellarium else "JNOW"
     logger.debug("handle_goto_command: ra,dec in deg, %s: %s, %s", epoch_s, ra, dec)
     _p = position_of_radec(ra_hours=ra / 15, dec_degrees=dec, epoch=epoch)
     ra_h, dec_d, _ = _p.radec(epoch=ts.J2000)
